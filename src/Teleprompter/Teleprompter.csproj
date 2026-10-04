@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!-- La version de plataforma 10.0.19041 habilita las API de Windows para OCR y renderizado de PDF,
+         y coincide con la version minima que soporta WDA_EXCLUDEFROMCAPTURE. -->
+    <TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Teleprompter</AssemblyName>
+    <RootNamespace>Teleprompter</RootNamespace>
+    <ApplicationIcon>Assets\teleprompter.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>Teleprompter</Product>
+    <AssemblyTitle>Teleprompter</AssemblyTitle>
+    <Description>Teleprompter flotante invisible al compartir pantalla</Description>
+    <Version>1.0.0</Version>
+    <SatelliteResourceLanguages>es;en</SatelliteResourceLanguages>
+    <!-- ThemeMode (tema Fluent de WPF) sigue marcado como experimental. -->
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\teleprompter.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.5.1" />
+    <PackageReference Include="Markdig" Version="1.4.0" />
+    <PackageReference Include="PdfPig" Version="0.1.16" />
+  </ItemGroup>
+
+</Project>

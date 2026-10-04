@@ -1,0 +1,284 @@
+<Window x:Class="Teleprompter.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Teleprompter.Controls"
+        Title="Ajustes del teleprompter"
+        Icon="pack://application:,,,/Assets/teleprompter.ico"
+        Width="540" Height="760" MinWidth="460" MinHeight="420"
+        ThemeMode="Dark" ShowInTaskbar="False" Language="es-MX"
+        WindowStartupLocation="Manual">
+    <Window.Resources>
+        <controls:PercentConverter x:Key="Percent" />
+
+        <Style x:Key="SectionTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,22,0,8" />
+        </Style>
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,0,12,0" />
+            <Setter Property="Opacity" Value="0.85" />
+        </Style>
+        <Style x:Key="FieldValue" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Right" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="Opacity" Value="0.85" />
+        </Style>
+        <Style x:Key="Hint" TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Opacity" Value="0.65" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="30,0,0,6" />
+        </Style>
+        <Style x:Key="Row" TargetType="Grid">
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="22,0,22,12">
+            <StackPanel>
+                <!-- Texto -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Texto" Margin="0,12,0,8" />
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Fuente" />
+                    <ComboBox x:Name="FontCombo" Grid.Column="1" SelectedItem="{Binding FontFamily}" HorizontalAlignment="Stretch">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontFamily="{Binding}" FontSize="15" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Tamaño" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="16" Maximum="160"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="8"
+                            Value="{Binding FontSize}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}" Text="{Binding FontSize, StringFormat={}{0:0} px}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Grosor" />
+                    <ComboBox x:Name="WeightCombo" Grid.Column="1" DisplayMemberPath="Label" SelectedValuePath="Value"
+                              SelectedValue="{Binding FontWeight}" HorizontalAlignment="Stretch" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Interlineado" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="2.5"
+                            TickFrequency="0.05" IsSnapToTickEnabled="True" SmallChange="0.05" LargeChange="0.25"
+                            Value="{Binding LineSpacing}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}" Text="{Binding LineSpacing, StringFormat={}{0:0.00}}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Alineación" />
+                    <ComboBox x:Name="AlignmentCombo" Grid.Column="1" DisplayMemberPath="Label" SelectedValuePath="Value"
+                              SelectedValue="{Binding TextAlignment}" HorizontalAlignment="Stretch" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Margen lateral" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="0" Maximum="35"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="5"
+                            Value="{Binding MarginPercent}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}" Text="{Binding MarginPercent, StringFormat={}{0:0} %}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Color del texto" VerticalAlignment="Top" Margin="0,6,12,0" />
+                    <controls:ColorPicker Grid.Column="1" Color="{Binding TextColor}" />
+                </Grid>
+
+                <!-- Fondo -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Fondo" />
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Color de fondo" VerticalAlignment="Top" Margin="0,6,12,0" />
+                    <controls:ColorPicker Grid.Column="1" Color="{Binding BackgroundColor}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Opacidad" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="0" Maximum="100"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10"
+                            Value="{Binding BackgroundOpacity, Converter={StaticResource Percent}}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}"
+                               Text="{Binding BackgroundOpacity, Converter={StaticResource Percent}, StringFormat={}{0:0} %}" />
+                </Grid>
+
+                <!-- Desplazamiento -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Desplazamiento" />
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Velocidad" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="1" Maximum="200"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10"
+                            Value="{Binding Speed}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}" Text="{Binding Speed, StringFormat={}{0:0} lín/min}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Cuenta regresiva" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="0" Maximum="10"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="1"
+                            Value="{Binding CountdownSeconds}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}" Text="{Binding CountdownSeconds, StringFormat={}{0} s}" />
+                </Grid>
+
+                <TextBlock Style="{StaticResource Hint}" Margin="0,2,0,0"
+                           Text="Manual: rueda del ratón, flechas arriba y abajo, RePág y AvPág, o arrastrando la barra de la derecha. Funciona también mientras avanza solo." />
+
+                <!-- Guia -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Guía de lectura" />
+
+                <CheckBox Content="Mostrar la franja de lectura" IsChecked="{Binding ShowGuide}" Margin="0,2,0,6" />
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="74" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Altura en pantalla" />
+                    <Slider Grid.Column="1" VerticalAlignment="Center" Minimum="5" Maximum="80"
+                            TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="5"
+                            Value="{Binding GuidePosition, Converter={StaticResource Percent}}" />
+                    <TextBlock Grid.Column="2" Style="{StaticResource FieldValue}"
+                               Text="{Binding GuidePosition, Converter={StaticResource Percent}, StringFormat={}{0:0} %}" />
+                </Grid>
+
+                <Grid Style="{StaticResource Row}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource FieldLabel}" Text="Color de la guía" VerticalAlignment="Top" Margin="0,6,12,0" />
+                    <controls:ColorPicker Grid.Column="1" Color="{Binding GuideColor}" />
+                </Grid>
+
+                <!-- Espejo -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Espejo" />
+                <CheckBox Content="Invertir horizontalmente (para cristal de teleprompter)" IsChecked="{Binding MirrorHorizontal}" Margin="0,2" />
+                <CheckBox Content="Invertir verticalmente" IsChecked="{Binding MirrorVertical}" Margin="0,2" />
+
+                <!-- Ventana -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Ventana" />
+
+                <CheckBox Content="Invisible al compartir pantalla y en capturas" IsChecked="{Binding HideFromCapture}" Margin="0,2" />
+                <TextBlock x:Name="CaptureStatus" Style="{StaticResource Hint}" />
+
+                <CheckBox Content="Siempre encima de las demás ventanas" IsChecked="{Binding AlwaysOnTop}" Margin="0,2" />
+
+                <CheckBox Content="Mostrar en la barra de tareas" IsChecked="{Binding ShowInTaskbar}" Margin="0,2" />
+                <TextBlock Style="{StaticResource Hint}"
+                           Text="Si compartes la pantalla completa, el ícono de la barra de tareas sí se ve. Desactívalo para que no quede rastro; usa Ctrl + Alt + H para mostrar u ocultar la ventana." />
+
+                <CheckBox Content="Dejar pasar los clics a la ventana de abajo" IsChecked="{Binding ClickThrough}"
+                          IsEnabled="{Binding GlobalHotkeys}" Margin="0,2" />
+                <TextBlock Style="{StaticResource Hint}"
+                           Text="Útil para leer encima de la videollamada sin estorbar. Se desactiva con Ctrl + Alt + T o abriendo de nuevo la aplicación. Requiere los atajos globales." />
+
+                <!-- Atajos -->
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Atajos globales" />
+                <CheckBox Content="Activar atajos aunque otra aplicación tenga el foco" IsChecked="{Binding GlobalHotkeys}" Margin="0,2,0,8" />
+
+                <ItemsControl x:Name="HotkeyList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border CornerRadius="4" Background="#1FFFFFFF" Padding="8,2" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Keys}" FontFamily="Consolas, Segoe UI" FontSize="12" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="{Binding Description}" VerticalAlignment="Center" TextWrapping="Wrap"
+                                           Opacity="{Binding Opacity}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock x:Name="HotkeyWarning" Style="{StaticResource Hint}" Margin="0,6,0,0" Foreground="#FFC83D" Opacity="1" Visibility="Collapsed" />
+
+                <TextBlock Style="{StaticResource SectionTitle}" Text="Con la ventana del teleprompter activa" />
+                <TextBlock Style="{StaticResource Hint}" Margin="0" Opacity="0.8" LineHeight="20"
+                           Text="Espacio: iniciar o pausar · Flechas arriba y abajo: mover una línea · Flechas izquierda y derecha: velocidad · Ctrl + flechas o Ctrl + rueda: tamaño de letra · Inicio y Fin: principio y final · F11 o doble clic: pantalla completa o modo ventana · Ctrl + O: abrir · Ctrl + E: editar · Ctrl + S: guardar · Esc: pausar o salir de pantalla completa" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="#22FFFFFF" Padding="22,12">
+            <DockPanel>
+                <Button DockPanel.Dock="Left" Content="Restablecer valores" Click="Reset_Click" />
+                <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Content="Cerrar" MinWidth="96"
+                        Style="{DynamicResource AccentButtonStyle}" Click="Close_Click" IsDefault="True" />
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

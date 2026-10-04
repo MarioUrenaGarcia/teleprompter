@@ -1,0 +1,160 @@
+<Window x:Class="Teleprompter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Teleprompter"
+        Icon="pack://application:,,,/Assets/teleprompter.ico"
+        Width="900" Height="340" MinWidth="380" MinHeight="170"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        ResizeMode="CanResize" AllowDrop="True"
+        FontFamily="Segoe UI" Language="es-MX">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="7" GlassFrameThickness="0"
+                      CornerRadius="0" UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Border x:Name="RootBorder" CornerRadius="12" BorderThickness="1" BorderBrush="#40FFFFFF" Background="#D9000000">
+        <Grid>
+            <!-- Area del guion -->
+            <Grid x:Name="Viewport" ClipToBounds="True" Background="Transparent"
+                  MouseLeftButtonDown="Viewport_MouseLeftButtonDown">
+                <Grid x:Name="MirrorHost" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform>
+                        <ScaleTransform x:Name="MirrorTransform" />
+                    </Grid.RenderTransform>
+
+                    <Grid x:Name="GuideBand" VerticalAlignment="Top" IsHitTestVisible="False">
+                        <Border x:Name="GuideFill" CornerRadius="6" Margin="16,0" />
+                        <Path x:Name="GuideArrowLeft" HorizontalAlignment="Left" VerticalAlignment="Center"
+                              Margin="3,0,0,0" Data="M0,0 L9,7 L0,14 Z" />
+                        <Path x:Name="GuideArrowRight" HorizontalAlignment="Right" VerticalAlignment="Center"
+                              Margin="0,0,3,0" Data="M9,0 L0,7 L9,14 Z" />
+                    </Grid>
+
+                    <Canvas x:Name="ScriptCanvas">
+                        <StackPanel x:Name="ScriptPanel"
+                                    TextOptions.TextHintingMode="Animated"
+                                    TextOptions.TextFormattingMode="Ideal">
+                            <StackPanel.RenderTransform>
+                                <TranslateTransform x:Name="ScrollTransform" />
+                            </StackPanel.RenderTransform>
+                        </StackPanel>
+                    </Canvas>
+                </Grid>
+
+                <TextBox x:Name="Editor" Visibility="Collapsed"
+                         AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                         BorderThickness="0" Background="#F2121317" Foreground="White" CaretBrush="White"
+                         SelectionBrush="#FFC83D" FontSize="18" Padding="22,14,22,14" Margin="0,46,0,30"
+                         SpellCheck.IsEnabled="True" />
+
+                <TextBlock x:Name="EditHint" Visibility="Collapsed" VerticalAlignment="Bottom" Margin="22,0,22,8"
+                           Foreground="#99FFFFFF" FontSize="12" TextTrimming="CharacterEllipsis"
+                           Text="Línea en blanco: párrafo nuevo     # Título     **negrita**     *cursiva*     - lista     Esc: terminar" />
+
+                <StackPanel x:Name="EmptyState" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            MaxWidth="540" Margin="24,50,24,20">
+                    <TextBlock Text="Tu guion aparecerá aquí" FontSize="22" FontWeight="SemiBold"
+                               Foreground="White" HorizontalAlignment="Center" />
+                    <TextBlock Margin="0,8,0,16" FontSize="14" Foreground="#B3FFFFFF"
+                               TextWrapping="Wrap" TextAlignment="Center"
+                               Text="Abre o arrastra aquí un PDF, un Word (.docx), un Markdown o un archivo de texto. También puedes escribirlo o pegarlo." />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource AccentPillButton}" Content="Abrir archivo" Click="Open_Click" />
+                        <Button Style="{StaticResource PillButton}" Content="Escribir o pegar" Click="Edit_Click" Margin="10,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+
+                <Border x:Name="CountdownBadge" Visibility="Collapsed" IsHitTestVisible="False"
+                        Width="150" Height="150" CornerRadius="75" Background="#B3000000"
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="CountdownText" FontSize="84" FontWeight="Bold" Foreground="White"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+
+                <Border x:Name="LoadingOverlay" Visibility="Collapsed" Background="#D9000000" CornerRadius="12">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="24">
+                        <TextBlock x:Name="LoadingTitle" FontSize="18" FontWeight="SemiBold" Foreground="White"
+                                   HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                        <TextBlock x:Name="LoadingDetail" Margin="0,6,0,0" FontSize="13" Foreground="#B3FFFFFF"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Margin="0,14,0,0" FontSize="12" Foreground="#80FFFFFF"
+                                   HorizontalAlignment="Center" Text="Esc para cancelar" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Barra de posicion: clic o arrastre para saltar a cualquier parte del guion -->
+            <Grid x:Name="PositionBar" Width="16" HorizontalAlignment="Right" Margin="0,52,3,14"
+                  Background="Transparent" Cursor="Hand" ToolTip="Arrastra para moverte por el guion"
+                  MouseLeftButtonDown="PositionBar_MouseLeftButtonDown"
+                  MouseMove="PositionBar_MouseMove"
+                  MouseLeftButtonUp="PositionBar_MouseLeftButtonUp">
+                <Border Width="3" CornerRadius="1.5" Background="#22FFFFFF" HorizontalAlignment="Center" />
+                <Border x:Name="PositionThumb" Width="5" CornerRadius="2.5" Background="#8CFFFFFF"
+                        HorizontalAlignment="Center" VerticalAlignment="Top" />
+            </Grid>
+
+            <!-- Barra de herramientas -->
+            <Border x:Name="Toolbar" VerticalAlignment="Top" Height="46" CornerRadius="11,11,0,0"
+                    Background="#EB16181D" BorderBrush="#1FFFFFFF" BorderThickness="0,0,0,1"
+                    MouseLeftButtonDown="Toolbar_MouseLeftButtonDown">
+                <DockPanel Margin="6,0" LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="ShieldButton" Style="{StaticResource IconButton}" Content="&#xE72E;"
+                                Click="Shield_Click" />
+                        <Button x:Name="FullScreenButton" Style="{StaticResource IconButton}" Content="&#xE740;"
+                                ToolTip="Pantalla completa (F11)" Click="FullScreen_Click" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE713;"
+                                ToolTip="Ajustes (Ctrl + ,)" Click="Settings_Click" />
+                        <Button x:Name="MinimizeButton" Style="{StaticResource IconButton}" Content="&#xE921;"
+                                ToolTip="Minimizar" Click="Minimize_Click" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE8BB;" FontSize="13"
+                                ToolTip="Cerrar" Click="Close_Click" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="EditGroup" DockPanel.Dock="Left" Orientation="Horizontal"
+                                VerticalAlignment="Center" Visibility="Collapsed">
+                        <Button Style="{StaticResource AccentPillButton}" Click="FinishEdit_Click" Margin="2,0,0,0"
+                                ToolTip="Aplicar los cambios (Esc)">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="{StaticResource IconFont}" Text="&#xE73E;" VerticalAlignment="Center" Margin="0,1,8,0" />
+                                <TextBlock Text="Listo" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource PillButton}" Content="Descartar cambios" Margin="8,0,0,0"
+                                Click="CancelEdit_Click" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="MainGroup" DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource IconButton}" Content="&#xE8E5;" ToolTip="Abrir documento (Ctrl + O)" Click="Open_Click" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE70F;" ToolTip="Escribir o editar el guion (Ctrl + E)" Click="Edit_Click" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE74E;" ToolTip="Guardar el guion (Ctrl + S)" Click="Save_Click" />
+                        <Border Style="{StaticResource ToolbarSeparator}" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE892;" ToolTip="Volver al inicio (Inicio)" Click="Restart_Click" />
+                        <Button x:Name="PlayButton" Style="{StaticResource PlayButton}" Content="&#xE768;"
+                                ToolTip="Iniciar o pausar (Espacio)" Click="Play_Click" />
+                        <Border Style="{StaticResource ToolbarSeparator}" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE738;" FontSize="12" ToolTip="Más lento (←)" Click="Slower_Click" />
+                        <TextBlock x:Name="SpeedText" Width="78" TextAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="White" FontSize="13" ToolTip="Velocidad en líneas por minuto" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE710;" FontSize="12" ToolTip="Más rápido (→)" Click="Faster_Click" />
+                        <Border Style="{StaticResource ToolbarSeparator}" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE8E7;" ToolTip="Letra más pequeña (Ctrl + ←)" Click="SmallerFont_Click" />
+                        <Button Style="{StaticResource IconButton}" Content="&#xE8E8;" ToolTip="Letra más grande (Ctrl + →)" Click="LargerFont_Click" />
+                    </StackPanel>
+
+                    <TextBlock x:Name="StatusText" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10,0,8,0"
+                               Foreground="#99FFFFFF" FontSize="12" TextTrimming="CharacterEllipsis" />
+                </DockPanel>
+            </Border>
+
+            <!-- Avisos breves: se muestran dentro de la ventana para que tampoco aparezcan al compartir pantalla -->
+            <Border x:Name="Toast" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="24,0,24,16"
+                    Padding="14,8" CornerRadius="8" Background="#F2202228" BorderBrush="#33FFFFFF" BorderThickness="1"
+                    Opacity="0" IsHitTestVisible="False">
+                <TextBlock x:Name="ToastText" Foreground="White" FontSize="13" TextWrapping="Wrap" MaxWidth="620" TextAlignment="Center" />
+            </Border>
+        </Grid>
+    </Border>
+</Window>
