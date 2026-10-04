@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 80" width="380" height="80" role="img" aria-labelledby="download-title">
+  <title id="download-title">Descargar para Windows</title>
+  <defs>
+    <linearGradient id="fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFD66B"/>
+      <stop offset="1" stop-color="#FFAE1F"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0.65"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="pill"><rect x="8" y="8" width="364" height="64" rx="32"/></clipPath>
+    <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; }
+    .halo { animation: halo 3.2s ease-in-out infinite; }
+    @keyframes halo { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.75; } }
+    .sweep { animation: sweep 3.2s ease-in-out infinite; }
+    @keyframes sweep { 0% { transform: translateX(-140px) skewX(-20deg); } 55%, 100% { transform: translateX(460px) skewX(-20deg); } }
+    .arrow { animation: drop 1.6s ease-in-out infinite; }
+    @keyframes drop { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+
+  <rect class="halo" x="14" y="14" width="352" height="56" rx="28" fill="#FFB020" filter="url(#glow)"/>
+  <rect x="8" y="8" width="364" height="64" rx="32" fill="url(#fill)"/>
+  <g clip-path="url(#pill)">
+    <rect class="sweep" x="0" y="0" width="80" height="80" fill="url(#shine)"/>
+  </g>
+  <rect x="8.5" y="8.5" width="363" height="63" rx="31.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.35"/>
+
+  <g fill="none" stroke="#1A1203" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M46 44 v8 a3 3 0 0 0 3 3 h20 a3 3 0 0 0 3 -3 v-8"/>
+    <g class="arrow">
+      <path d="M59 25 v20"/>
+      <path d="M52 38 l7 7 l7 -7"/>
+    </g>
+  </g>
+  <text x="222" y="48" text-anchor="middle" font-size="22" font-weight="700" fill="#1A1203">Descargar para Windows</text>
+</svg>

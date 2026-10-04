@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 320" width="1280" height="320" role="img" aria-labelledby="formats-title formats-desc">
+  <title id="formats-title">Abre tus documentos</title>
+  <desc id="formats-desc">Archivos PDF, Word, Markdown y texto entran a Teleprompter y salen como un guion limpio listo para leer.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0F21"/>
+      <stop offset="1" stop-color="#141A38"/>
+    </linearGradient>
+    <linearGradient id="iconBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2C3A60"/>
+      <stop offset="1" stop-color="#0E1426"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.18" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="windowFade" maskUnits="userSpaceOnUse" x="0" y="34" width="424" height="206">
+      <rect x="0" y="34" width="424" height="206" fill="url(#fade)"/>
+    </mask>
+    <clipPath id="card"><rect width="1280" height="320" rx="28"/></clipPath>
+    <clipPath id="windowClip"><rect width="424" height="240" rx="16"/></clipPath>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
+
+    <path id="p1" d="M268 64 C420 64 450 160 572 160"/>
+    <path id="p2" d="M268 132 C420 132 460 160 572 160"/>
+    <path id="p3" d="M268 200 C420 200 460 160 572 160"/>
+    <path id="p4" d="M268 268 C420 268 450 160 572 160"/>
+
+    <g id="doc" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="18" fill="#F4F6FB">
+      <text x="24" y="118" font-size="20" font-weight="700">Introducción</text>
+      <text x="24" y="150">Los documentos se convierten en</text>
+      <text x="24" y="182">texto limpio y fácil de leer:</text>
+      <text x="24" y="214">títulos, <tspan font-weight="700">negritas</tspan> y listas se</text>
+      <text x="24" y="246">conservan, y los PDF escaneados</text>
+      <text x="24" y="278">se reconocen con <tspan fill="#FFC83D" font-weight="700">OCR</tspan>.</text>
+      <text x="24" y="310">Solo ábrelos y empieza.</text>
+    </g>
+  </defs>
+  <style>
+    text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; }
+    .bob { animation: bob 4s ease-in-out infinite; }
+    .b2 { animation-delay: -1s; }
+    .b3 { animation-delay: -2s; }
+    .b4 { animation-delay: -3s; }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    .glow { transform-box: fill-box; transform-origin: center; animation: glow 3s ease-in-out infinite; }
+    @keyframes glow { 0%, 100% { opacity: 0.45; transform: scale(0.92); } 50% { opacity: 0.9; transform: scale(1.08); } }
+    .flow { animation: flow 0.8s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -24; } }
+    .scroll { animation: scroll 14s linear infinite; }
+    @keyframes scroll { from { transform: translateY(0); } to { transform: translateY(-224px); } }
+    .band { animation: band 3s ease-in-out infinite; }
+    @keyframes band { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } .particles { display: none; } }
+  </style>
+
+  <g clip-path="url(#card)">
+    <rect width="1280" height="320" fill="url(#bg)"/>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="319" rx="27.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <!-- Rutas -->
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.09" stroke-width="2" stroke-dasharray="4 6">
+    <use href="#p1" xlink:href="#p1"/>
+    <use href="#p2" xlink:href="#p2"/>
+    <use href="#p3" xlink:href="#p3"/>
+    <use href="#p4" xlink:href="#p4"/>
+  </g>
+
+  <!-- Particulas -->
+  <g class="particles">
+    <circle r="4" fill="#FF6B6B"><animateMotion dur="2.4s" repeatCount="indefinite" begin="0s"><mpath href="#p1" xlink:href="#p1"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="0s"/></circle>
+    <circle r="4" fill="#FF6B6B"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-1.2s"><mpath href="#p1" xlink:href="#p1"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-1.2s"/></circle>
+    <circle r="4" fill="#4C8DFF"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-0.4s"><mpath href="#p2" xlink:href="#p2"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-0.4s"/></circle>
+    <circle r="4" fill="#4C8DFF"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-1.6s"><mpath href="#p2" xlink:href="#p2"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-1.6s"/></circle>
+    <circle r="4" fill="#A78BFA"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-0.8s"><mpath href="#p3" xlink:href="#p3"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-0.8s"/></circle>
+    <circle r="4" fill="#A78BFA"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-2s"><mpath href="#p3" xlink:href="#p3"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-2s"/></circle>
+    <circle r="4" fill="#B6C0D4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-0.2s"><mpath href="#p4" xlink:href="#p4"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-0.2s"/></circle>
+    <circle r="4" fill="#B6C0D4"><animateMotion dur="2.4s" repeatCount="indefinite" begin="-1.4s"><mpath href="#p4" xlink:href="#p4"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.1;0.85;1" dur="2.4s" repeatCount="indefinite" begin="-1.4s"/></circle>
+  </g>
+
+  <!-- Archivos -->
+  <g font-size="17" font-weight="600">
+    <g class="bob">
+      <rect x="56" y="36" width="212" height="56" rx="14" fill="#121830" stroke="#FFFFFF" stroke-opacity="0.1"/>
+      <path d="M74 48 H90 L98 56 V80 H74 Z" fill="#FF6B6B" fill-opacity="0.16" stroke="#FF6B6B" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M90 48 V56 H98" fill="none" stroke="#FF6B6B" stroke-width="1.8" stroke-linejoin="round"/>
+      <text x="112" y="70" fill="#F4F6FB">PDF</text>
+      <rect x="200" y="53" width="52" height="22" rx="11" fill="#FFC83D" fill-opacity="0.16" stroke="#FFC83D" stroke-opacity="0.55"/>
+      <text x="226" y="69" text-anchor="middle" font-size="12" font-weight="700" fill="#FFC83D">OCR</text>
+    </g>
+    <g class="bob b2">
+      <rect x="56" y="104" width="212" height="56" rx="14" fill="#121830" stroke="#FFFFFF" stroke-opacity="0.1"/>
+      <path d="M74 116 H90 L98 124 V148 H74 Z" fill="#4C8DFF" fill-opacity="0.16" stroke="#4C8DFF" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M90 116 V124 H98" fill="none" stroke="#4C8DFF" stroke-width="1.8" stroke-linejoin="round"/>
+      <text x="112" y="138" fill="#F4F6FB">Word (.docx)</text>
+    </g>
+    <g class="bob b3">
+      <rect x="56" y="172" width="212" height="56" rx="14" fill="#121830" stroke="#FFFFFF" stroke-opacity="0.1"/>
+      <path d="M74 184 H90 L98 192 V216 H74 Z" fill="#A78BFA" fill-opacity="0.16" stroke="#A78BFA" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M90 184 V192 H98" fill="none" stroke="#A78BFA" stroke-width="1.8" stroke-linejoin="round"/>
+      <text x="112" y="206" fill="#F4F6FB">Markdown (.md)</text>
+    </g>
+    <g class="bob b4">
+      <rect x="56" y="240" width="212" height="56" rx="14" fill="#121830" stroke="#FFFFFF" stroke-opacity="0.1"/>
+      <path d="M74 252 H90 L98 260 V284 H74 Z" fill="#B6C0D4" fill-opacity="0.16" stroke="#B6C0D4" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M90 252 V260 H98" fill="none" stroke="#B6C0D4" stroke-width="1.8" stroke-linejoin="round"/>
+      <text x="112" y="274" fill="#F4F6FB">Texto (.txt)</text>
+    </g>
+  </g>
+
+  <!-- Icono central -->
+  <circle class="glow" cx="640" cy="160" r="80" fill="#FFB020" fill-opacity="0.35" filter="url(#blur)"/>
+  <g transform="translate(572 92) scale(0.53125)">
+    <rect x="10" y="10" width="236" height="236" rx="51" fill="url(#iconBg)"/>
+    <rect x="10.5" y="10.5" width="235" height="235" rx="50.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2"/>
+    <rect x="31" y="107.5" width="194.5" height="43.5" rx="13" fill="#FFC83D" fill-opacity="0.27"/>
+    <rect x="69" y="48" width="143" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+    <rect x="69" y="71" width="118" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+    <rect x="69" y="121" width="133" height="16.6" rx="8.3" fill="#FFFFFF"/>
+    <rect x="69" y="171" width="128" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+    <rect x="69" y="194" width="92" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+    <path d="M33 106 L58.5 129.3 L33 152.6 Z" fill="#FFC83D"/>
+  </g>
+
+  <!-- Salida -->
+  <path class="flow" d="M720 160 H786" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 4"/>
+  <path d="M782 152 L794 160 L782 168" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Guion listo -->
+  <g transform="translate(808 40)">
+    <g clip-path="url(#windowClip)">
+      <rect width="424" height="240" fill="#090C16" fill-opacity="0.92"/>
+      <g class="band"><rect x="14" y="96" width="396" height="32" rx="7" fill="#FFC83D" fill-opacity="0.16"/></g>
+      <path d="M4 105 L11 112 L4 119 Z" fill="#FFC83D"/>
+      <path d="M420 105 L413 112 L420 119 Z" fill="#FFC83D"/>
+      <g mask="url(#windowFade)">
+        <g class="scroll">
+          <use href="#doc" xlink:href="#doc" y="-224"/>
+          <use href="#doc" xlink:href="#doc"/>
+          <use href="#doc" xlink:href="#doc" y="224"/>
+        </g>
+      </g>
+      <rect width="424" height="34" fill="#141823"/>
+      <circle cx="56" cy="17" r="10" fill="#FFC83D"/>
+      <path d="M52.5 12 L61.5 17 L52.5 22 Z" fill="#1A1A1A"/>
+      <g fill="none" stroke="#E6E9F2" stroke-opacity="0.8" stroke-width="1.6" stroke-linecap="round">
+        <path d="M16 12 h5 l1.5 1.5 h6.5 v8 h-13 z"/>
+        <path d="M398 12 l9 9 M407 12 l-9 9"/>
+      </g>
+      <g fill="none" stroke="#6EE79A" stroke-width="1.6" stroke-linecap="round">
+        <rect x="370" y="16" width="10" height="8" rx="1.5"/>
+        <path d="M372.5 16 v-2.5 a2.5 2.5 0 0 1 5 0 v2.5"/>
+      </g>
+    </g>
+    <rect x="0.5" y="0.5" width="423" height="239" rx="15.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.16"/>
+  </g>
+</svg>

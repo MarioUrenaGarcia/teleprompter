@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 560" width="1280" height="560" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">Teleprompter</title>
+  <desc id="hero-desc">Teleprompter para Windows: el guion se desplaza en una ventana flotante que desaparece al compartir pantalla.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0F21"/>
+      <stop offset="0.55" stop-color="#121735"/>
+      <stop offset="1" stop-color="#1C1240"/>
+    </linearGradient>
+    <linearGradient id="titleFill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#C7CEFF"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFD66B"/>
+      <stop offset="1" stop-color="#FFAE1F"/>
+    </linearGradient>
+    <linearGradient id="iconBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2C3A60"/>
+      <stop offset="1" stop-color="#0E1426"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.16" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="viewportFade" maskUnits="userSpaceOnUse" x="0" y="50" width="508" height="326">
+      <rect x="0" y="50" width="508" height="326" fill="url(#fade)"/>
+    </mask>
+    <clipPath id="card"><rect width="1280" height="560" rx="28"/></clipPath>
+    <clipPath id="windowClip"><rect width="508" height="376" rx="18"/></clipPath>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.3" fill="#FFFFFF" fill-opacity="0.07"/>
+    </pattern>
+    <g id="script" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#F4F6FB">
+      <text x="40" y="179">Buenas tardes a todos.</text>
+      <text x="40" y="225">Gracias por acompañarnos hoy.</text>
+      <text x="40" y="271">Quiero contarles cómo nos fue</text>
+      <text x="40" y="317">este trimestre y qué sigue.</text>
+      <text x="40" y="363">Primero, la gran noticia:</text>
+      <text x="40" y="409">crecimos un <tspan fill="#FFC83D" font-weight="700">32 %</tspan> en usuarios.</text>
+      <text x="40" y="455">Segundo, lanzamos la nueva</text>
+      <text x="40" y="501">versión antes de lo previsto.</text>
+      <text x="40" y="547">Y lo mejor de todo:</text>
+      <text x="40" y="593">nadie notó que estaba</text>
+      <text x="40" y="639" font-weight="700">leyendo este guion.</text>
+    </g>
+  </defs>
+
+  <style>
+    text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; }
+    .orb-a { animation: drift-a 16s ease-in-out infinite; }
+    .orb-b { animation: drift-b 19s ease-in-out infinite; }
+    .orb-c { animation: drift-c 13s ease-in-out infinite; }
+    @keyframes drift-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-90px, 50px); } }
+    @keyframes drift-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(110px, -40px); } }
+    @keyframes drift-c { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, -60px); } }
+    .rise { opacity: 0; animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.25s; }
+    .d3 { animation-delay: 0.4s; }
+    .d4 { animation-delay: 0.55s; }
+    .d5 { animation-delay: 0.7s; }
+    .d6 { animation-delay: 1.1s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    .float { animation: float 7s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .scroll { animation: scroll 26s linear infinite; }
+    @keyframes scroll { from { transform: translateY(0); } to { transform: translateY(-506px); } }
+    .thumb { animation: thumb 26s linear infinite; }
+    @keyframes thumb { from { transform: translateY(0); } to { transform: translateY(236px); } }
+    .band { animation: band 3.2s ease-in-out infinite; }
+    @keyframes band { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    .ping { transform-box: fill-box; transform-origin: center; animation: ping 2.2s ease-out infinite; }
+    @keyframes ping { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.8); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .rise { opacity: 1; }
+    }
+  </style>
+
+  <!-- Fondo -->
+  <g clip-path="url(#card)">
+    <rect width="1280" height="560" fill="url(#bg)"/>
+    <rect width="1280" height="560" fill="url(#dots)"/>
+    <g filter="url(#blur)">
+      <circle class="orb-a" cx="1080" cy="70" r="170" fill="#5B45FF" fill-opacity="0.45"/>
+      <circle class="orb-b" cx="150" cy="560" r="200" fill="#FF9F1C" fill-opacity="0.22"/>
+      <circle class="orb-c" cx="760" cy="330" r="140" fill="#19C3D6" fill-opacity="0.18"/>
+    </g>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="559" rx="27.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <!-- Icono -->
+  <g transform="translate(72 92)">
+    <g class="rise d1">
+      <g transform="scale(0.34375)">
+        <rect x="10" y="10" width="236" height="236" rx="51" fill="url(#iconBg)"/>
+        <rect x="31" y="107.5" width="194.5" height="43.5" rx="13" fill="#FFC83D" fill-opacity="0.27"/>
+        <rect x="69" y="48" width="143" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+        <rect x="69" y="71" width="118" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+        <rect x="69" y="121" width="133" height="16.6" rx="8.3" fill="#FFFFFF"/>
+        <rect x="69" y="171" width="128" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+        <rect x="69" y="194" width="92" height="16.6" rx="8.3" fill="#FFFFFF" fill-opacity="0.59"/>
+        <path d="M33 106 L58.5 129.3 L33 152.6 Z" fill="#FFC83D"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Textos -->
+  <text class="rise d2" x="72" y="268" font-size="78" font-weight="800" letter-spacing="-1.5" fill="url(#titleFill)">Teleprompter</text>
+  <text class="rise d3" x="72" y="330" font-size="36" font-weight="700" fill="#FFFFFF">Lee tu guion. <tspan fill="url(#amber)">Nadie más lo ve.</tspan></text>
+  <text class="rise d4" font-size="20" fill="#AEB6CF">
+    <tspan x="72" y="380">Flota sobre tus aplicaciones y desaparece</tspan>
+    <tspan x="72" y="408">cuando compartes pantalla.</tspan>
+  </text>
+
+  <g class="rise d5" font-size="15" font-weight="600">
+    <rect x="72" y="440" width="128" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <text x="136" y="465" text-anchor="middle" fill="#DDE3F5">PDF con OCR</text>
+    <rect x="210" y="440" width="76" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <text x="248" y="465" text-anchor="middle" fill="#DDE3F5">Word</text>
+    <rect x="296" y="440" width="108" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <text x="350" y="465" text-anchor="middle" fill="#DDE3F5">Markdown</text>
+    <rect x="414" y="440" width="168" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <text x="498" y="465" text-anchor="middle" fill="#DDE3F5">Pantalla completa</text>
+  </g>
+
+  <!-- Ventana del teleprompter -->
+  <g transform="translate(704 84)">
+    <g class="rise d3">
+      <g class="float">
+        <rect x="10" y="26" width="488" height="360" rx="22" fill="#000000" fill-opacity="0.55" filter="url(#shadow)"/>
+        <g clip-path="url(#windowClip)">
+          <rect width="508" height="376" fill="#090C16" fill-opacity="0.92"/>
+
+          <g class="band"><rect x="18" y="148" width="472" height="46" rx="9" fill="#FFC83D" fill-opacity="0.16"/></g>
+          <path d="M5 161 L14 171 L5 181 Z" fill="#FFC83D"/>
+          <path d="M503 161 L494 171 L503 181 Z" fill="#FFC83D"/>
+
+          <g mask="url(#viewportFade)">
+            <g class="scroll">
+              <use href="#script" xlink:href="#script" y="-506"/>
+              <use href="#script" xlink:href="#script"/>
+              <use href="#script" xlink:href="#script" y="506"/>
+            </g>
+          </g>
+
+          <rect x="496" y="64" width="3" height="296" rx="1.5" fill="#FFFFFF" fill-opacity="0.1"/>
+          <rect class="thumb" x="495" y="64" width="5" height="60" rx="2.5" fill="#FFFFFF" fill-opacity="0.5"/>
+
+          <rect width="508" height="50" fill="#141823"/>
+          <rect y="49.5" width="508" height="1" fill="#FFFFFF" fill-opacity="0.08"/>
+          <g fill="none" stroke="#E6E9F2" stroke-opacity="0.85" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 19 h6 l2 2 h8 v10 h-16 z"/>
+            <path d="M46 32 l10 -10 l3 3 l-10 10 h-3 z"/>
+            <path d="M138 25 h10"/>
+            <path d="M224 25 h10 M229 20 v10"/>
+            <circle cx="460" cy="25" r="6"/>
+            <path d="M483 20 l10 10 M493 20 l-10 10"/>
+          </g>
+          <path d="M72 16 v18" stroke="#FFFFFF" stroke-opacity="0.2"/>
+          <circle cx="102" cy="25" r="15" fill="#FFC83D"/>
+          <path d="M97 18 L109 25 L97 32 Z" fill="#1A1A1A"/>
+          <text x="186" y="30" font-size="13" fill="#FFFFFF" text-anchor="middle">18 lín/min</text>
+          <text x="412" y="30" font-size="12" fill="#FFFFFF" fill-opacity="0.55" text-anchor="end">Guion · quedan 1:05</text>
+          <g fill="none" stroke="#6EE79A" stroke-width="1.8" stroke-linecap="round">
+            <rect x="426" y="23" width="12" height="9" rx="2"/>
+            <path d="M428.5 23 v-3 a3.5 3.5 0 0 1 7 0 v3"/>
+          </g>
+        </g>
+        <rect x="0.5" y="0.5" width="507" height="375" rx="17.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.16"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Insignia -->
+  <g transform="translate(988 486)">
+    <g class="rise d6">
+      <rect width="224" height="40" rx="20" fill="#0F1A17" stroke="#6EE79A" stroke-opacity="0.45"/>
+      <circle class="ping" cx="22" cy="20" r="5" fill="#6EE79A"/>
+      <circle cx="22" cy="20" r="5" fill="#6EE79A"/>
+      <text x="38" y="26" font-size="15" font-weight="600" fill="#C9F7D9">Oculto al compartir</text>
+    </g>
+  </g>
+</svg>

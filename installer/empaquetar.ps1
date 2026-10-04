@@ -50,6 +50,10 @@ foreach ($script in 'instalar.cmd', 'instalar.ps1', 'desinstalar.ps1') {
 foreach ($document in 'README.md', 'LICENSE') {
     Copy-Item -LiteralPath (Join-Path $repoRoot $document) -Destination $stagingDir
 }
+# Las ilustraciones del README, para que se vea completo tambien fuera de GitHub.
+$readmeAssets = Join-Path $stagingDir 'docs\readme'
+New-Item -ItemType Directory -Force -Path $readmeAssets | Out-Null
+Copy-Item -Path (Join-Path $repoRoot 'docs\readme\*.svg') -Destination $readmeAssets
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 [System.IO.Compression.ZipFile]::CreateFromDirectory($stagingDir, $zipPath, [System.IO.Compression.CompressionLevel]::Optimal, $true)

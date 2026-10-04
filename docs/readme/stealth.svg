@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-labelledby="stealth-title stealth-desc">
+  <title id="stealth-title">Tú lo ves, ellos no</title>
+  <desc id="stealth-desc">A la izquierda, tu pantalla durante una videollamada con el teleprompter encima. A la derecha, lo que ven los demás al compartir pantalla: la misma llamada sin el teleprompter.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A0F21"/>
+      <stop offset="1" stop-color="#141A38"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFD66B"/>
+      <stop offset="1" stop-color="#FFAE1F"/>
+    </linearGradient>
+    <linearGradient id="t1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22305A"/><stop offset="1" stop-color="#141B33"/></linearGradient>
+    <linearGradient id="t2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A2457"/><stop offset="1" stop-color="#1A1330"/></linearGradient>
+    <linearGradient id="t3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D4044"/><stop offset="1" stop-color="#10222A"/></linearGradient>
+    <linearGradient id="t4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4A3420"/><stop offset="1" stop-color="#22180F"/></linearGradient>
+    <linearGradient id="scanFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5CE1E6" stop-opacity="0"/>
+      <stop offset="1" stop-color="#5CE1E6" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="0.8" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="overlayFade" maskUnits="userSpaceOnUse" x="0" y="28" width="360" height="122">
+      <rect x="0" y="28" width="360" height="122" fill="url(#fade)"/>
+    </mask>
+    <clipPath id="card"><rect width="1280" height="640" rx="28"/></clipPath>
+    <clipPath id="overlayClip"><rect width="360" height="150" rx="12"/></clipPath>
+    <clipPath id="sharedClip"><rect x="670" y="150" width="560" height="400" rx="16"/></clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="170%"><feGaussianBlur stdDeviation="12"/></filter>
+
+    <g id="call" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif">
+      <rect width="560" height="400" rx="16" fill="#0D1220"/>
+      <text x="20" y="31" font-size="15" font-weight="600" fill="#E8ECF7">Reunión semanal</text>
+
+      <rect x="16" y="48" width="258" height="134" rx="12" fill="url(#t1)"/>
+      <circle cx="145" cy="108" r="28" fill="#6C7BFF"/>
+      <text x="145" y="117" text-anchor="middle" font-size="24" font-weight="700" fill="#0D1220">A</text>
+      <text x="28" y="170" font-size="13" fill="#E8ECF7">Ana</text>
+
+      <rect x="286" y="48" width="258" height="134" rx="12" fill="url(#t2)"/>
+      <circle cx="415" cy="108" r="28" fill="#FF8AD8"/>
+      <text x="415" y="117" text-anchor="middle" font-size="24" font-weight="700" fill="#0D1220">L</text>
+      <text x="298" y="170" font-size="13" fill="#E8ECF7">Luis</text>
+
+      <rect x="16" y="194" width="258" height="134" rx="12" fill="url(#t3)"/>
+      <circle cx="145" cy="254" r="28" fill="#5CE1E6"/>
+      <text x="145" y="263" text-anchor="middle" font-size="24" font-weight="700" fill="#0D1220">S</text>
+      <text x="28" y="316" font-size="13" fill="#E8ECF7">Sofía</text>
+
+      <rect x="286" y="194" width="258" height="134" rx="12" fill="url(#t4)"/>
+      <circle cx="415" cy="254" r="28" fill="#FFC83D"/>
+      <text x="415" y="263" text-anchor="middle" font-size="24" font-weight="700" fill="#0D1220">T</text>
+      <text x="298" y="316" font-size="13" fill="#E8ECF7">Tú</text>
+
+      <circle cx="220" cy="364" r="15" fill="#2A3146"/>
+      <rect x="216" y="356" width="8" height="12" rx="4" fill="none" stroke="#E8ECF7" stroke-width="1.6"/>
+      <circle cx="260" cy="364" r="15" fill="#2A3146"/>
+      <rect x="252" y="358" width="11" height="12" rx="2" fill="none" stroke="#E8ECF7" stroke-width="1.6"/>
+      <path d="M263 362 l5 -3 v10 l-5 -3" fill="none" stroke="#E8ECF7" stroke-width="1.6" stroke-linejoin="round"/>
+      <circle cx="300" cy="364" r="15" fill="#3B82F6"/>
+      <path d="M300 370 v-11 M295 363 l5 -5 l5 5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="340" cy="364" r="15" fill="#EF4444"/>
+      <path d="M332 366 q8 -7 16 0" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
+
+      <rect x="0.5" y="0.5" width="559" height="399" rx="15.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.1"/>
+    </g>
+
+    <g id="mini" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F4F6FB">
+      <text x="22" y="83">Hola a todos, gracias por venir.</text>
+      <text x="22" y="111">Hoy les traigo tres noticias.</text>
+      <text x="22" y="139">La primera: superamos la meta</text>
+      <text x="22" y="167">de ventas del trimestre.</text>
+      <text x="22" y="195">La segunda: abrimos dos</text>
+      <text x="22" y="223">nuevas oficinas este año.</text>
+      <text x="22" y="251">Y la tercera: nadie ve</text>
+      <text x="22" y="279" font-weight="700" fill="#FFC83D">que estoy leyendo esto.</text>
+    </g>
+  </defs>
+
+  <style>
+    text { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; }
+    .scroll { animation: scroll 16s linear infinite; }
+    @keyframes scroll { from { transform: translateY(0); } to { transform: translateY(-224px); } }
+    .band { animation: band 3s ease-in-out infinite; }
+    @keyframes band { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+    .float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .ghost { animation: ghost 6s ease-in-out infinite; }
+    @keyframes ghost { 0%, 15% { opacity: 0; } 30%, 70% { opacity: 1; } 85%, 100% { opacity: 0; } }
+    .dash { animation: dash 1.2s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -28; } }
+    .scan { animation: scan 3.6s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
+    @keyframes scan { 0% { transform: translateY(-60px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(400px); opacity: 0; } }
+    .rec { animation: rec 1.4s ease-in-out infinite; }
+    @keyframes rec { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+    .flow { animation: flow 0.9s linear infinite; }
+    @keyframes flow { to { stroke-dashoffset: -20; } }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+      .ghost { opacity: 1; }
+    }
+  </style>
+
+  <g clip-path="url(#card)">
+    <rect width="1280" height="640" fill="url(#bg)"/>
+  </g>
+  <rect x="0.5" y="0.5" width="1279" height="639" rx="27.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <text x="640" y="72" text-anchor="middle" font-size="40" font-weight="800" fill="#FFFFFF">Tú lo ves. <tspan fill="url(#amber)">Ellos no.</tspan></text>
+  <text x="640" y="110" text-anchor="middle" font-size="18" fill="#AEB6CF">A la izquierda, tu pantalla. A la derecha, lo que ven los demás cuando la compartes.</text>
+
+  <!-- Tu pantalla -->
+  <use href="#call" xlink:href="#call" x="50" y="150"/>
+  <g transform="translate(150 190)">
+    <g class="float">
+      <rect x="8" y="16" width="344" height="140" rx="14" fill="#000000" fill-opacity="0.6" filter="url(#shadow)"/>
+      <g clip-path="url(#overlayClip)">
+        <rect width="360" height="150" fill="#080B14" fill-opacity="0.93"/>
+        <g class="band"><rect x="12" y="64" width="336" height="28" rx="6" fill="#FFC83D" fill-opacity="0.18"/></g>
+        <path d="M3 72 L9 78 L3 84 Z" fill="#FFC83D"/>
+        <path d="M357 72 L351 78 L357 84 Z" fill="#FFC83D"/>
+        <g mask="url(#overlayFade)">
+          <g class="scroll">
+            <use href="#mini" xlink:href="#mini" y="-224"/>
+            <use href="#mini" xlink:href="#mini"/>
+            <use href="#mini" xlink:href="#mini" y="224"/>
+          </g>
+        </g>
+        <rect width="360" height="28" fill="#141823"/>
+        <circle cx="50" cy="14" r="9" fill="#FFC83D"/>
+        <path d="M47 9.5 L55 14 L47 18.5 Z" fill="#1A1A1A"/>
+        <g fill="none" stroke="#E6E9F2" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round">
+          <path d="M14 10 h4 l1.5 1.5 h5.5 v7 h-11 z"/>
+          <path d="M72 14 h7 M100 14 h7 M103.5 10.5 v7"/>
+          <path d="M335 9 l8 8 M343 9 l-8 8"/>
+        </g>
+        <g fill="none" stroke="#6EE79A" stroke-width="1.5" stroke-linecap="round">
+          <rect x="310" y="13" width="9" height="7" rx="1.5"/>
+          <path d="M312 13 v-2 a2.5 2.5 0 0 1 5 0 v2"/>
+        </g>
+      </g>
+      <rect x="0.5" y="0.5" width="359" height="149" rx="11.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.22"/>
+    </g>
+  </g>
+
+  <!-- Flecha central -->
+  <path class="flow" d="M616 350 H654" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 4"/>
+  <path d="M650 342 L662 350 L650 358" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Lo que ven los demas -->
+  <use href="#call" xlink:href="#call" x="670" y="150"/>
+  <circle class="rec" cx="1104" cy="176" r="5" fill="#EF4444"/>
+  <text x="1116" y="181" font-size="13" font-weight="600" fill="#FFB4B4">Compartiendo</text>
+  <g clip-path="url(#sharedClip)">
+    <rect class="scan" x="670" y="150" width="560" height="60" fill="url(#scanFill)"/>
+  </g>
+  <g transform="translate(770 190)">
+    <g class="ghost">
+      <rect class="dash" width="360" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.03" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1.5" stroke-dasharray="8 6"/>
+      <text x="180" y="70" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">Aquí está tu guion</text>
+      <text x="180" y="95" text-anchor="middle" font-size="14" fill="#C3CAE0">pero no aparece al compartir</text>
+    </g>
+  </g>
+
+  <!-- Etiquetas -->
+  <rect x="230" y="572" width="200" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFC83D" stroke-opacity="0.5"/>
+  <circle cx="258" cy="591" r="5" fill="#FFC83D"/>
+  <text x="340" y="597" text-anchor="middle" font-size="16" font-weight="600" fill="#F4F6FB">Tu pantalla</text>
+  <rect x="822" y="572" width="256" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.06" stroke="#EF4444" stroke-opacity="0.5"/>
+  <circle class="rec" cx="850" cy="591" r="5" fill="#EF4444"/>
+  <text x="960" y="597" text-anchor="middle" font-size="16" font-weight="600" fill="#F4F6FB">Lo que ven al compartir</text>
+</svg>
