@@ -19,23 +19,34 @@ Teleprompter de escritorio para Windows que flota encima de las demás ventanas 
 ## Requisitos
 
 - Windows 10 versión 2004 o posterior, o Windows 11 (64 bits).
-- Para instalar desde el código: [SDK de .NET 10](https://dotnet.microsoft.com/download). La aplicación instalada no necesita .NET aparte.
+- No necesita instalar .NET. Solo para compilar desde el código hace falta el [SDK de .NET 10](https://dotnet.microsoft.com/download).
 
 ## Instalación
 
-1. Abre la carpeta `installer`.
-2. Haz doble clic en `instalar.cmd`.
+### Opción 1: versión compilada (recomendada)
 
-El instalador compila la aplicación, la copia a `%LOCALAPPDATA%\Programs\Teleprompter`, crea los accesos directos en el menú Inicio y en el escritorio y la registra en **Configuración > Aplicaciones**. No requiere permisos de administrador. Después puedes buscarla escribiendo "Teleprompter" en el menú Inicio.
+1. Descarga el archivo `Teleprompter-<versión>-win-x64.zip` desde la sección [Releases](../../releases/latest).
+2. Descomprímelo y haz doble clic en `instalar.cmd`.
+
+Si prefieres no instalar nada, también puedes abrir directamente `app\Teleprompter.exe` dentro de la carpeta descomprimida.
+
+La aplicación no está firmada digitalmente, así que Windows puede mostrar un aviso de SmartScreen la primera vez. Para continuar elige **Más información** y luego **Ejecutar de todas formas**.
+
+### Opción 2: compilar desde el código
+
+1. Instala el SDK de .NET 10.
+2. Abre la carpeta `installer` y haz doble clic en `instalar.cmd`.
+
+En ambos casos el instalador copia la aplicación a `%LOCALAPPDATA%\Programs\Teleprompter`, crea los accesos directos en el menú Inicio y en el escritorio y la registra en **Configuración > Aplicaciones**. No requiere permisos de administrador. Después puedes buscarla escribiendo "Teleprompter" en el menú Inicio.
 
 Opciones desde PowerShell:
 
 ```powershell
-.\installer\instalar.ps1 -SinEscritorio   # sin acceso directo en el escritorio
-.\installer\instalar.ps1 -NoAbrir         # no abrir la aplicación al terminar
+.\instalar.ps1 -SinEscritorio   # sin acceso directo en el escritorio
+.\instalar.ps1 -NoAbrir         # no abrir la aplicación al terminar
 ```
 
-Para actualizar, vuelve a ejecutar el instalador: conserva los ajustes y el último guion.
+Para actualizar, vuelve a ejecutar el instalador de la versión nueva: conserva los ajustes y el último guion.
 
 ## Uso
 
@@ -117,6 +128,14 @@ Para desinstalar, busca Teleprompter en **Configuración > Aplicaciones > Aplica
 dotnet run --project src/Teleprompter
 ```
 
+## Generar el paquete para Releases
+
+```powershell
+.\installer\empaquetar.ps1
+```
+
+Deja en `artifacts` el `.zip` con la aplicación compilada, el instalador, este README y la licencia, junto con su huella SHA256. La versión se toma de `<Version>` en `src/Teleprompter/Teleprompter.csproj`.
+
 ## Estructura
 
 ```
@@ -125,7 +144,7 @@ src/Teleprompter/
   Rendering/    Conversión del guion a texto en pantalla
   Services/     Invisibilidad en capturas, atajos globales, almacenamiento
   Controls/     Selector de color y convertidores
-installer/      Instalador y desinstalador
+installer/      Instalador, desinstalador y script de empaquetado
 ```
 
 ## Licencia

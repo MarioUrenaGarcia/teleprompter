@@ -1,13 +1,14 @@
 ﻿#Requires -Version 5.1
 <#
 .SYNOPSIS
-    Compila e instala Teleprompter para el usuario actual.
+    Instala Teleprompter para el usuario actual.
 
 .DESCRIPTION
-    Publica la aplicacion autocontenida (no requiere instalar .NET aparte), la copia a
-    %LOCALAPPDATA%\Programs\Teleprompter, crea los accesos directos en el menu Inicio y en el
-    escritorio, y la registra en Configuracion > Aplicaciones para poder desinstalarla.
-    No necesita permisos de administrador.
+    Si junto al script hay una carpeta "app" con la aplicacion ya compilada (paquete descargado de
+    Releases), la usa directamente. Si no, compila la aplicacion autocontenida desde el codigo fuente.
+    En ambos casos la copia a %LOCALAPPDATA%\Programs\Teleprompter, crea los accesos directos en el
+    menu Inicio y en el escritorio, y la registra en Configuracion > Aplicaciones para poder
+    desinstalarla. No necesita permisos de administrador ni instalar .NET aparte.
 
 .PARAMETER SinEscritorio
     No crea el acceso directo en el escritorio.
@@ -27,7 +28,7 @@ $Description = 'Teleprompter flotante invisible al compartir pantalla'
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $project = Join-Path $repoRoot 'src\Teleprompter\Teleprompter.csproj'
-$publishDir = Join-Path $repoRoot 'artifacts\publish'
+$prebuiltDir = Join-Path $PSScriptRoot 'app'
 $installDir = Join-Path $env:LOCALAPPDATA "Programs\$AppName"
 $exe = Join-Path $installDir "$AppName.exe"
 
@@ -36,22 +37,29 @@ function Write-Step([string]$Message) {
     Write-Host "==> $Message" -ForegroundColor Cyan
 }
 
-if (-not (Test-Path $project)) {
-    throw "No se encontró el proyecto en '$project'. Ejecuta este script desde la carpeta installer del repositorio."
+if (Test-Path -LiteralPath (Join-Path $prebuiltDir "$AppName.exe")) {
+    Write-Step 'Usando la aplicación ya compilada incluida en el paquete'
+    $sourceDir = $prebuiltDir
 }
+else {
+    if (-not (Test-Path $project)) {
+        throw "No se encontró la carpeta 'app' ni el proyecto en '$project'. Ejecuta este script desde el paquete descomprimido o desde la carpeta installer del repositorio."
+    }
 
-if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
-    throw 'Se necesita el SDK de .NET 10 para compilar. Descárgalo desde https://dotnet.microsoft.com/download'
-}
+    if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) {
+        throw 'Se necesita el SDK de .NET 10 para compilar. Descárgalo desde https://dotnet.microsoft.com/download o usa el paquete ya compilado de la sección Releases.'
+    }
 
-Write-Step 'Compilando la aplicación (puede tardar un par de minutos la primera vez)'
-if (Test-Path $publishDir) {
-    Remove-Item -LiteralPath $publishDir -Recurse -Force
-}
+    $sourceDir = Join-Path $repoRoot 'artifacts\publish'
+    Write-Step 'Compilando la aplicación (puede tardar un par de minutos la primera vez)'
+    if (Test-Path $sourceDir) {
+        Remove-Item -LiteralPath $sourceDir -Recurse -Force
+    }
 
-& dotnet publish $project -c Release -r win-x64 --self-contained true -o $publishDir -p:DebugType=None -p:DebugSymbols=false --nologo
-if ($LASTEXITCODE -ne 0) {
-    throw 'La compilación falló. Revisa los mensajes anteriores.'
+    & dotnet publish $project -c Release -r win-x64 --self-contained true -o $sourceDir -p:DebugType=None -p:DebugSymbols=false --nologo
+    if ($LASTEXITCODE -ne 0) {
+        throw 'La compilación falló. Revisa los mensajes anteriores.'
+    }
 }
 
 Write-Step 'Cerrando Teleprompter si está abierto'
@@ -68,7 +76,7 @@ if (Test-Path $installDir) {
     Remove-Item -LiteralPath $installDir -Recurse -Force
 }
 New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-Copy-Item -Path (Join-Path $publishDir '*') -Destination $installDir -Recurse -Force
+Copy-Item -Path (Join-Path $sourceDir '*') -Destination $installDir -Recurse -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'desinstalar.ps1') -Destination $installDir -Force
 
 Write-Step 'Creando accesos directos'

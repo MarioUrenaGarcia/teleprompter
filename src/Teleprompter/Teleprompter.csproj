@@ -17,6 +17,8 @@
     <AssemblyTitle>Teleprompter</AssemblyTitle>
     <Description>Teleprompter flotante invisible al compartir pantalla</Description>
     <Version>1.0.0</Version>
+    <!-- Sin el hash del commit, la version que ve el usuario en Windows queda limpia: "1.0.0". -->
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <SatelliteResourceLanguages>es;en</SatelliteResourceLanguages>
     <!-- ThemeMode (tema Fluent de WPF) sigue marcado como experimental. -->
     <NoWarn>$(NoWarn);WPF0001</NoWarn>
